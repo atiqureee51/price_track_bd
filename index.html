@@ -1,0 +1,146 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Commodity Price Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Google Maps JavaScript API (replace with your own key) -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfWVgdykprMfpOCSkZqtgTF9awsmSdPxw&libraries=places">
+  </script>
+
+  <!-- Chart.js for data visualization -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header with Title + Year Dropdown -->
+  <header id="header">
+    <h1>Commodity Price Tracker</h1>
+  </header>
+
+  <!-- Language Switch -->
+  <div id="language-switch">
+    <button id="btn-bangla">বাংলা</button>
+    <button id="btn-english">English</button>
+    <button>2024 ▼</button>
+  </div>
+
+  <!-- Dashboard Section -->
+  <section id="dashboard">
+    <h2 id="dashboard-title">Commodity Price Dashboard</h2>
+    <div id="dashboard-metrics">
+      <div class="card" id="total-commodities">Total Commodities: 0</div>
+      <div class="card" id="highest-price">Highest Price: -</div>
+      <div class="card" id="lowest-price">Lowest Price: -</div>
+      <div class="card" id="price-difference">Price Difference: -</div>
+      <div class="card" id="average-price">Daily Average Price: -</div>
+      <div class="card" id="monthly-average">Monthly Average: -</div>
+      <div class="card" id="yearly-average">Yearly Average: -</div>
+    </div>
+  </section>
+
+  <!-- Commodity & Filter Selections -->
+  <section id="selection-row">
+    <div class="filter-group">
+      <label for="commodity-select">Select Commodity:</label>
+      <select id="commodity-select"></select>
+    </div>
+    <div class="filter-group">
+      <label for="commodity-filter">Filter Commodity:</label>
+      <select id="commodity-filter">
+        <option value="all">Show All</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- Map Section -->
+  <section id="map-container">
+    <input
+      id="map-search-box"
+      type="text"
+      placeholder="Search or click the map to input price data..."
+    />
+    <div id="map-box"></div>
+  </section>
+
+  <!-- Charts Section -->
+  <section id="charts-container">
+    <div class="chart-box">
+      <h3>Line Chart</h3>
+      <canvas id="line-chart"></canvas>
+    </div>
+    <div class="chart-box">
+      <h3>Bar Chart</h3>
+      <canvas id="bar-chart"></canvas>
+    </div>
+    <div class="chart-box">
+      <h3>Scatter Plot</h3>
+      <canvas id="scatter-chart"></canvas>
+    </div>
+  </section>
+
+  <!-- Popup Form for Commodity Data Entry -->
+  <div id="form-popup">
+    <div class="popup-header">
+      <h3 id="popup-title">Enter Commodity Details</h3>
+      <button id="cancel-btn">X</button>
+    </div>
+    <form id="commodityForm">
+      <div class="form-group">
+        <label for="commodity-input">Commodity:</label>
+        <select id="commodity-input" required></select>
+      </div>
+
+      <div class="form-group">
+        <label for="price-input">Price (BDT):</label>
+        <input type="number" id="price-input" required min="1" step="any"/>
+      </div>
+
+      <div class="form-group">
+        <label for="unit-input">Unit:</label>
+        <select id="unit-input" required>
+          <option value="kg">Kilogram (kg)</option>
+          <option value="single">Single</option>
+          <option value="dozen">Dozen</option>
+          <option value="hali">Hali (Four)</option>
+          <option value="liter">Liter</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="market-input">Market/Shop Type:</label>
+        <select id="market-input" required>
+          <option value="Market/Bazar">Market/Bazar</option>
+          <option value="Super Shop">Super Shop</option>
+          <option value="Local Shop">Local Shop</option>
+          <option value="Farmer Direct">Farmer Direct</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="retail-wholesale">Retail/Wholesale:</label>
+        <select id="retail-wholesale">
+          <option value="retail">Retail</option>
+          <option value="wholesale">Wholesale</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="price-set-type">Price Set Type:</label>
+        <select id="price-set-type">
+          <option value="local_price">Local Price</option>
+          <option value="government_set_price">Government Set Price</option>
+        </select>
+      </div>
+
+      <button type="submit">Save</button>
+    </form>
+  </div>
+
+  <!-- Main JS -->
+  <script src="script.js"></script>
+</body>
+</html>
